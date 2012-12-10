@@ -3,7 +3,7 @@
 class ExpertsController < ApplicationController
   
   def index
-  
+    logger.debug("index-------")  
   
   
   end

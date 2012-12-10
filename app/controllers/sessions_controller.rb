@@ -11,11 +11,13 @@ class SessionsController < ApplicationController
     logger.debug(@user.inspect)
     
     if !@user
-      redirect_to :root
+      redirect_to :root 
+      return
     else
       #ここでクッキーをいれる。
       cookies.signed[:user_id] ={ value: @user.id ,expires: 30.days.from_now } 
       redirect_to :root
+      return
     end
 
 
@@ -28,6 +30,7 @@ class SessionsController < ApplicationController
       #クッキーを削除する。
       cookies.delete :user_id
       redirect_to :root
+      return
     end
 
   end

@@ -3,12 +3,33 @@
 <head>
   <title>SampleOfMessage</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
   <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+      $(document).bind('mobileinit', function(){
+        //初期設定など。
+        $.mobile.ajaxEnabled = false;
+        $.mobile.linkBindingEnabled = false;
+      });
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+
+
+
+<div data-role="page">
+  <%= yield %>
+</div>
+
+
+
+
+
+
 
 </body>
 </html>

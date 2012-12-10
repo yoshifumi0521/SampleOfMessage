@@ -1,7 +1,6 @@
 SampleOfMessage::Application.routes.draw do
 
   root :to => "experts#index"
- 
   resource :experts
   resources :sessions, only: [:create,:destroy]
 
