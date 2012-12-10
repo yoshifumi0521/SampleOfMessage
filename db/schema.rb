@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210104709) do
-
-  create_table "matchings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "messagelist_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "matchings", ["messagelist_id"], :name => "index_matchings_on_messagelist_id"
-  add_index "matchings", ["user_id"], :name => "index_matchings_on_user_id"
+ActiveRecord::Schema.define(:version => 20121210104522) do
 
   create_table "messagelists", :force => true do |t|
     t.integer  "user_id"
