@@ -1,4 +1,10 @@
 SampleOfMessage::Application.routes.draw do
+
+  get "member/index"
+  root :to => "member#index"
+
+  resources :sessions, only: [:create,:destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
