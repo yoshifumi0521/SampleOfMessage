@@ -2,7 +2,11 @@ SampleOfMessage::Application.routes.draw do
 
   root :to => "messages#index" 
   
-  resources :messages
+  resources :messages do
+    
+    collection {get "experts"}
+
+  end
   
   resources :sessions, only: [:create,:destroy]
 

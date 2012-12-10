@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
       @current_user = User.find_by_id(cookies.signed[:user_id])
       #クッキー情報があったとしても、ユーザー情報がなくてnilだったら、クッキーを削除する。 
       cookies.delete :user_id unless @current_user
+    
+    else
+
+
+
     end
  
  

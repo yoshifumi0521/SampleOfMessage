@@ -3,7 +3,10 @@
 </div>
 
 <div data-role="content" data-theme="b">
+  
   <% if !@current_user %>
+  
+  <!--　ログインしてない場合の処理。 -->
         <%= form_tag :sessions do %>
         
           <p>名前:<%= text_field_tag "name" %></p>
@@ -12,7 +15,10 @@
   
         <% end %>
 
+  
   <% else %>
+
+  <!-- ログインしてる場合の処理。 -->
     <p>
       <%= @current_user.name %>
       <% if @current_user.advice %>
@@ -21,18 +27,19 @@
       さん
       <%= link_to "ログアウト",session_path(@current_user.id),method: :delete %>
     </p>
+    <p><%= link_to "エキスパート一覧へ",:experts_messages %></p>
 
-    <ul data-role="listview" data-theme="a">
-      
-      <% @experts.each do |expert| %>
 
-        <li><%= link_to expert.name + "さん" %></li>
-      
-      <% end %>
-    </ul>
+
+
 
 
   <% end %>
+
+
+
+
+
 </div>
 
 

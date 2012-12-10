@@ -1,0 +1,24 @@
+<div data-role="header" data-theme="b">
+    <h1>エキスパート一覧</h1>
+</div>
+
+<div data-role="content" data-theme="b">
+    <p><%= link_to "メッセージホーム",:root %></p> 
+    <p>全<span style="color: red"><%= @experts.size %></span>件</p>
+
+    <ul data-role="listview" data-theme="a">
+      
+      <% @experts.each do |expert| %>
+
+        <li><%= link_to expert.name + "さん" %></li>
+      
+      <% end %>
+    </ul>
+
+
+
+</div>
+
+
+
+

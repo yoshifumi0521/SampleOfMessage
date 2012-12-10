@@ -8,6 +8,15 @@ class MessagesController < ApplicationController
     if !@current_user
       return
     end
+
+  
+  
+  end
+
+
+  def experts
+    logger.debug("expertアクション")
+
     #expertモデルで、ユーザーのidを取得する。
     @current_userId =  @current_user.id.to_s
 
@@ -15,17 +24,8 @@ class MessagesController < ApplicationController
     @experts = User.find_by_sql(["select * from users 
     WHERE advice = ? and not id = ?",true, @current_userId ]) 
 
-    logger.debug(@experts)
 
-
-
-
-  
-  
   end
-
-
-
 
 
 
