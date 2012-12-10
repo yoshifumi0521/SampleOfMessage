@@ -14,12 +14,22 @@
 
   <% else %>
     <p>
-      ようこそ<%= @current_user.name %>さん
+      <%= @current_user.name %>
+      <% if @current_user.advice %>
+        (エキスパート)
+      <% end %>
+      さん
       <%= link_to "ログアウト",session_path(@current_user.id),method: :delete %>
     </p>
 
+    <ul data-role="listview" data-theme="a">
+      
+      <% @experts.each do |expert| %>
 
-
+        <li><%= link_to expert.name + "さん" %></li>
+      
+      <% end %>
+    </ul>
 
 
   <% end %>
