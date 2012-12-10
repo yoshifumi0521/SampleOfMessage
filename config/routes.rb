@@ -4,7 +4,15 @@ SampleOfMessage::Application.routes.draw do
   
   resources :messages do
     
-    collection {get "experts"}
+    collection do
+      get "experts"
+    end
+
+    member do
+      get "feed"
+      post "up"
+    end
+
 
   end
   

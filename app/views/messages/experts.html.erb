@@ -10,7 +10,7 @@
       
       <% @experts.each do |expert| %>
 
-        <li><%= link_to expert.name + "さん" %></li>
+        <li><%= link_to expert.name + "さん", feed_message_path(expert.id) %></li>
       
       <% end %>
     </ul>

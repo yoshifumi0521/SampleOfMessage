@@ -9,11 +9,43 @@ class MessagesController < ApplicationController
       return
     end
 
-  
+    #メッセージの一覧を表示させる処理。
+
+
+
+
   
   end
 
 
+  #メッセージを表示させるメソッド
+  def feed 
+    
+    logger.debug(params)
+
+
+
+
+
+  end
+
+
+  #メッセージをpostで追加するメソッド。
+  def up
+
+
+
+
+
+
+
+  end
+
+
+
+
+
+  #エキスパートを一覧するメソッド
   def experts
     logger.debug("expertアクション")
 
