@@ -1,7 +1,8 @@
 #coding: utf-8
 class MessagesController < ApplicationController
   
-  
+     
+
   def index
 
     #ログアウトした場合は、このindexアクションをreturnする。

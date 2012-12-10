@@ -7,7 +7,8 @@ class Messagelist < ActiveRecord::Base
   #Userモデルと１対多の関係を結ぶ。
   belongs_to :user
 
-
+  #Messageモデルと１対多の関係を結ぶ。
+  has_many :messages
 
 
 
