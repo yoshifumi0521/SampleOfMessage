@@ -1,9 +1,9 @@
 #coding: utf-8
-#expertコントローラー
-class ExpertsController < ApplicationController
+class MessagesController < ApplicationController
+  
   
   def index
-    
+
     #ログアウトした場合は、このindexアクションをreturnする。
     if !@current_user
       return
@@ -16,8 +16,14 @@ class ExpertsController < ApplicationController
     WHERE advice = ? and not id = ?",true, @current_userId ]) 
 
     logger.debug(@experts)
+
+
+
+
+  
   
   end
+
 
 
 
