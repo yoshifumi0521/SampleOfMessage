@@ -1,13 +1,27 @@
 
 <h1>メッセージのサンプル</h1>
 
-<p>ログイン</p>
-  <%= form_tag :sessions do %>
-    <p>名前:<%= text_field_tag "name" %></p>
-    <p>パスワード:<%= text_field_tag "password" %></p>
-    <p><%= submit_tag "送信" %></p>
-  <% end %>
+<% if !@current_user %>
+  <p>ログイン</p>
+      <%= form_tag :sessions do %>
+        
+        <p>名前:<%= text_field_tag "name" %></p>
+        <p>パスワード:<%= text_field_tag "password" %></p>
+        <p><%= submit_tag "送信" %></p>
+  
+      <% end %>
 
+<% else %>
+  <p>
+    ようこそ<%= @current_user.name %>さん
+    <%= link_to "ログアウト",session_path(@current_user.id),method: :delete %>
+  </p>
+
+
+
+
+
+<% end %>
 
 
 
