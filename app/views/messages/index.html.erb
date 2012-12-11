@@ -1,5 +1,5 @@
 <div data-role="header" data-theme="b">
-    <h1>メッセージのサンプル</h1>
+    <h1>メッセージ一覧</h1>
 </div>
 
 <div data-role="content" data-theme="b">
@@ -29,9 +29,21 @@
     </p>
     <p><%= link_to "エキスパート一覧へ",:experts_messages %></p>
 
-
-
-
+    <!--　メッセージ簡易表示する。 -->
+    <ol data-role="listview" data-theme="c">
+      <% @messages.each do |message| %>
+        <li>
+          <a href="/messages/<%= message.session.expert_id %>/feed">
+            <% if message.writer_id == @current_user.id %>
+              自分から(<%= User.find(message.session.expert_id).name %>)さんへ。
+            <% else %> 
+              (<%= User.find(message.session.expert_id).name %>)から。
+            <% end %>
+            メッセージ: <%= message.content %> 
+          </a>
+        </li>      
+      <% end %>
+    </ol>
 
 
   <% end %>

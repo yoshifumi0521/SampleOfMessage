@@ -17,16 +17,16 @@ class MessagesController < ApplicationController
 
     #メッセージを仮にいれる配列変数 
     @arrMes = [] 
-    #メッセージを一ついれる。
+    #メッセージの配列の最後のオブジェクトを取り出す。
     @sessions.each do |session|
-      @arrMes <<  session.messages[0]
+      @arrMes <<  session.messages.last
     end
 
     #@arrMesをソートする。idの古い順でソート。
     @messages = @arrMes.sort{|a,b|
       b.id <=> a.id
     }
-
+    
 
   end
 
