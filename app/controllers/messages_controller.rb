@@ -15,11 +15,17 @@ class MessagesController < ApplicationController
     @current_user_id = @current_user.id 
     @sessions = Session.where("user_id = ? or expert_id = ?",@current_user_id,@current_user_id)
 
+    #メッセージを仮にいれる配列変数 
+    @arrMes = [] 
+    #メッセージを一ついれる。
     @sessions.each do |session|
-      logger.debug(session.messages[0])
-
+      @arrMes <<  session.messages[0]
     end
 
+    #@arrMesをソートする。idの古い順でソート。
+    @messages = @arrMes.sort{|a,b|
+      b.id <=> a.id
+    }
 
 
   end
@@ -27,7 +33,7 @@ class MessagesController < ApplicationController
 
   #メッセージを表示させるメソッド
   def feed 
-    
+   
     #エキスパートのidを取得する。
     expert_id = params[:id]
     #ログインユーザーのidを取得する。
