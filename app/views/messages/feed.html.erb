@@ -5,7 +5,8 @@
 <div data-role="content" data-theme="b">
 
   <p>エキスパート<span style="color:red"><%= @expert_name %></span>さんへ質問</p>
-  
+  <p><%= link_to "エキスパート一覧へ",:experts_messages %></p>
+
   <!-- ここにコメントを書いていく。 -->
   <% if @messages.blank? %>
     
