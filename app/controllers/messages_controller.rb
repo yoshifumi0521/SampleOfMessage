@@ -54,7 +54,6 @@ class MessagesController < ApplicationController
     @message = Message.new 
     @message.session_id = session.id
     @message.writer_id = current_user_id 
-    
 
   end
 
