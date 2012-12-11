@@ -4,24 +4,47 @@
 
 <div data-role="content" data-theme="b">
 
-  <p><%= @expert_name %>さんがエキスパート</p>
-
+  <p>エキスパート<span style="color:red"><%= @expert_name %></span>さんへ質問</p>
   
-
-
-
-
-
-
-
-
-
-  <!-- ここでコメントを書くフォームをつくる。-->
+  <!-- ここにコメントを書いていく。 -->
+  <% if @messages.blank? %>
     
+    <p>メッセージ0件</p>
 
+  <% else %>
+    
+    <ol data-role="listview" data-theme="c">
+      <% @messages.each do |message| %>
+        
+        <li>
+          <% if message.writer_id == @current_user.name %>
+            投稿者:( <%= @current_user.name%>)
+          <% else %>
+            投稿者:( <%= @expert_name %>)
+          <% end %>
+          
+          <!-- メッセージ　-->
+          メッセージ: <%= message.content %>
+        </li>
+
+      <% end %>
+    </ol>
+
+  <% end %>
 
 </div>
 
+<div data-role="footer" data-position="fixed" data-theme="b">
+  
+  <!-- ここでコメントを書くフォームをつくる。-->
+  <%= form_for @message,:url => {:action => "up"} do |form| %>  
+    
+    <%= form.text_area :content %>
+    <%= form.hidden_field :writer_id %>
+    
+    <%= form.hidden_field :session_id %>
+    <%= form.submit "送信" %>
+  
+  <% end %>
 
-
-
+</div>
