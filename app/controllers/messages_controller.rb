@@ -13,20 +13,23 @@ class MessagesController < ApplicationController
     #メッセージの一覧を表示させる処理。
 
 
-
-
-  
   end
 
 
   #メッセージを表示させるメソッド
   def feed 
     
-    logger.debug(params)
+    #エキスパートのidを取得する。
+    #@expert_id = params[:id]
+    #@expert_name = User.find(@expert_id).name
 
+    #Messagelistモデルを取得する。データがなかったら、データをつくる。
+    #@messagelist = @current_user.
+    #messagelists.find_or_create_by_expert_id(@expert_id)
+    
+    #ここでユーザーとエキスパートの画像を取得する。
 
-
-
+    
 
   end
 

@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20121210122118) do
 
   create_table "messagelists", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "expert_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "expert_id",  :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(:version => 20121210122118) do
   create_table "messages", :force => true do |t|
     t.integer  "writer_id"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "messagelist_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|
