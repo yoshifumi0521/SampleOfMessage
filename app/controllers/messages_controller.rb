@@ -11,6 +11,15 @@ class MessagesController < ApplicationController
     end
 
     #メッセージの一覧を表示させる処理。
+    #ユーザーとエキスパートどっちのメッセージのSessionモデルを取り出す。
+    @current_user_id = @current_user.id 
+    @sessions = Session.where("user_id = ? or expert_id = ?",@current_user_id,@current_user_id)
+
+    @sessions.each do |session|
+      logger.debug(session.messages[0])
+
+    end
+
 
 
   end
@@ -33,16 +42,10 @@ class MessagesController < ApplicationController
     #Sessionオブジェクトを生成したかどうかを判定する。
     if session.new_record?
       #セッションがはじめてつくられたらここを通る。
-      #sessionを保存する。
-      if session.save    
-        #保存に成功したらここを通る。
-      
-      else
-        #保存に失敗したらエラー処理。
+      #セッションの保存は、メッセージを一つしたら作成する。
 
-        
-      end
-    
+
+
     else
       #2回目の場合。
       #今までのメッセージが入った配列のオブジェクト
@@ -52,7 +55,6 @@ class MessagesController < ApplicationController
 
     #空のMessageモデルのオブジェクトを作成する。
     @message = Message.new 
-    @message.session_id = session.id
     @message.writer_id = current_user_id 
 
   end
@@ -61,14 +63,21 @@ class MessagesController < ApplicationController
   #メッセージをpostで追加するメソッド。
   def up
 
+    #エキスパートのidを所得する。
+    @expert_id = params[:id]
+
+    #sessionレコードを保存する。
+    @session_id = Session.find_or_create_by_user_id_and_expert_id(@current_user.id,@expert_id)
+
     #messageモデルのオブジェクトを取得する。
-    @message = Message.new     
+    @message = Message.new 
+    @message.session_id = @session_id 
     @message.attributes = params[:message]
 
     if @message.save
       
       #feedにリダイレクトする。
-      redirect_to feed_message_path([params[:id]])
+      redirect_to feed_message_path(@expert_id)
       return
     
     else
