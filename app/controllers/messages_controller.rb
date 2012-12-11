@@ -50,7 +50,6 @@ class MessagesController < ApplicationController
       #2回目の場合。
       #今までのメッセージが入った配列のオブジェクト
       @messages = session.messages
-
     end
 
     #空のMessageモデルのオブジェクトを作成する。
@@ -63,19 +62,19 @@ class MessagesController < ApplicationController
   #メッセージをpostで追加するメソッド。
   def up
 
+    logger.debug(params)
     #エキスパートのidを所得する。
     @expert_id = params[:id]
 
     #sessionレコードを保存する。
-    @session_id = Session.find_or_create_by_user_id_and_expert_id(@current_user.id,@expert_id)
+    session = Session.find_or_create_by_user_id_and_expert_id(@current_user.id,@expert_id)
 
     #messageモデルのオブジェクトを取得する。
     @message = Message.new 
-    @message.session_id = @session_id 
     @message.attributes = params[:message]
-
+    @message.session_id = session.id 
+    
     if @message.save
-      
       #feedにリダイレクトする。
       redirect_to feed_message_path(@expert_id)
       return
