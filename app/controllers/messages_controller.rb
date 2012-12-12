@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
       expert_id =@current_user.id
       #相手の名前
       @partner_name = User.find_by_id(user_id).name
-    else @type == "user"
+    elsif @type == "user"
     #それ以外
       user_id = @current_user.id
       expert_id = params[:id]
@@ -83,7 +83,7 @@ class MessagesController < ApplicationController
       user_id = params[:id]
       expert_id =@current_user.id
       @redirecturl = url_for(:controller => :messages, :action => :feed, :id => user_id, :type => "expert" )  
-    else @type == "user"
+    elsif @type == "user"
       #それ以外
       user_id = @current_user.id
       expert_id = params[:id]
