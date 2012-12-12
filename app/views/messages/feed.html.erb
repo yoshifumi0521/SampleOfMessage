@@ -4,9 +4,13 @@
 
 <div data-role="content" data-theme="b">
 
-  <p>エキスパート<span style="color:red"><%= @expert_name %></span>さんへ質問</p>
   <p><%= link_to "エキスパート一覧へ",:experts_messages %></p>
-
+  <% if @type == "expert" %> 
+    <p>自分に対しての質問</p>
+  <% elsif @type == "user" %>
+    <p>エキスパート<span style="color:red"><%= @partner_name %></span>さんへ質問</p>
+  <% end %>
+  
   <!-- ここにコメントを書いていく。 -->
   <% if @messages.blank? %>
     
@@ -22,7 +26,7 @@
             <% if message.writer_id == @current_user.id %>
               投稿者:( <%= @current_user.name%>さん)
             <% else %>
-              投稿者:( <%= @expert_name %>さん)
+              投稿者:( <%= @partner_name %>さん)
             <% end %>
           
             <!-- メッセージ　-->
@@ -44,7 +48,8 @@
     
     <%= form.text_area :content %>
     <%= form.hidden_field :writer_id %>
-    
+    <!-- タイプを隠して送信する。　-->
+    <input type="hidden" name="type" value="<%= @type %>"> 
     <%= form.submit "送信" %>
   
   <% end %>

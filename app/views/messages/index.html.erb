@@ -47,7 +47,7 @@
           <% else %>
 
           <!-- ログインユーザーが、エキスパートではなく、ユーザーとしてセッションを組んだ場合。 -->   
-            <a href="/messages/<%= message.session.expert_id %>/feed">
+            <a href="/messages/<%= message.session.expert_id %>/feed?type=user">
               <% if message.writer_id == @current_user.id %>
                 自分からエキスパート(<%= User.find(message.session.expert_id).name %>)さんへ。
               <% else %> 

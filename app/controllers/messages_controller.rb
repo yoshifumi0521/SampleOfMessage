@@ -33,18 +33,26 @@ class MessagesController < ApplicationController
 
   #メッセージを表示させるメソッド
   def feed 
-   
-    #エキスパートのidを取得する。
-    expert_id = params[:id]
-    #ログインユーザーのidを取得する。
-    current_user_id = @current_user.id
 
-    #ここでユーザーとエキスパートの画像を取得する。
-    @expert_name = User.find(expert_id).name
-    
+    @type = params[:type]
+    #ログインユーザーがエキスパートで、セッションがエキスパートとして参加してる場合。
+    if @type == "expert"
+      
+      user_id = params[:id]
+      expert_id =@current_user.id
+      #相手の名前
+      @partner_name = User.find_by_id(user_id).name
+    else @type == "user"
+    #それ以外
+      user_id = @current_user.id
+      expert_id = params[:id]
+      #相手の名前
+      @partner_name = User.find_by_id(expert_id).name
+    end
+  
     #Sessionのオブジェクトを取得する。なかったら、生成する。
-    session = Session.find_or_initialize_by_user_id_and_expert_id(current_user_id,expert_id)
-   
+    session = Session.find_or_initialize_by_user_id_and_expert_id(user_id,expert_id)
+
     #Sessionオブジェクトを生成したかどうかを判定する。
     if session.new_record?
       #セッションがはじめてつくられたらここを通る。
@@ -60,7 +68,7 @@ class MessagesController < ApplicationController
 
     #空のMessageモデルのオブジェクトを作成する。
     @message = Message.new 
-    @message.writer_id = current_user_id 
+    @message.writer_id = @current_user.id 
 
   end
 
@@ -68,12 +76,21 @@ class MessagesController < ApplicationController
   #メッセージをpostで追加するメソッド。
   def up
 
-    logger.debug(params)
-    #エキスパートのidを所得する。
-    @expert_id = params[:id]
-
+    @type = params[:type]
+    if @type == "expert"
+      
+      user_id = params[:id]
+      expert_id =@current_user.id
+      @redirecturl = url_for(:controller => :messages, :action => :feed, :id => user_id, :type => "expert" )  
+    else @type == "user"
+      #それ以外
+      user_id = @current_user.id
+      expert_id = params[:id]
+      @redirecturl = url_for(:controller => :messages, :action => :feed, :id => expert_id, :type => "user" )  
+    end
+    
     #sessionレコードを保存する。
-    session = Session.find_or_create_by_user_id_and_expert_id(@current_user.id,@expert_id)
+    session = Session.find_or_create_by_user_id_and_expert_id(user_id,expert_id)
 
     #messageモデルのオブジェクトを取得する。
     @message = Message.new 
@@ -82,7 +99,7 @@ class MessagesController < ApplicationController
     
     if @message.save
       #feedにリダイレクトする。
-      redirect_to feed_message_path(@expert_id)
+      redirect_to @redirecturl
       return
     
     else
