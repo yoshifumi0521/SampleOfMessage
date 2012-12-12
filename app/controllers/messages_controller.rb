@@ -26,7 +26,6 @@ class MessagesController < ApplicationController
     @messages = @arrMes.sort{|a,b|
       b.id <=> a.id
     }
-    
 
   end
 
@@ -37,7 +36,6 @@ class MessagesController < ApplicationController
     @type = params[:type]
     #ログインユーザーがエキスパートで、セッションがエキスパートとして参加してる場合。
     if @type == "expert"
-      
       user_id = params[:id]
       expert_id =@current_user.id
       #相手の名前
@@ -48,6 +46,9 @@ class MessagesController < ApplicationController
       expert_id = params[:id]
       #相手の名前
       @partner_name = User.find_by_id(expert_id).name
+    else
+      #エラー処理。
+
     end
   
     #Sessionのオブジェクトを取得する。なかったら、生成する。
@@ -87,6 +88,9 @@ class MessagesController < ApplicationController
       user_id = @current_user.id
       expert_id = params[:id]
       @redirecturl = url_for(:controller => :messages, :action => :feed, :id => expert_id, :type => "user" )  
+    else
+      #エラー処理。
+
     end
     
     #sessionレコードを保存する。
