@@ -33,14 +33,31 @@
     <ol data-role="listview" data-theme="c">
       <% @messages.each do |message| %>
         <li>
-          <a href="/messages/<%= message.session.expert_id %>/feed">
-            <% if message.writer_id == @current_user.id %>
-              自分から(<%= User.find(message.session.expert_id).name %>)さんへ。
-            <% else %> 
-              (<%= User.find(message.session.expert_id).name %>)から。
-            <% end %>
-            メッセージ: <%= message.content %> 
-          </a>
+          
+          <!-- ログインユーザーがエキスパートとして、セッションを組んだ場合。 -->
+          <% if @current_user.id == message.session.expert_id %>
+            <a href="/messages/<%= message.session.user_id %>/feed?type=expert">
+              <% if message.writer_id == @current_user.id %>
+                自分から質問者(<%= User.find(message.session.user_id).name %>)さんへ。
+              <% else %> 
+                質問者(<%= User.find(message.session.user_id).name %>)さんから。
+              <% end %>
+                メッセージ: <%= message.content %> 
+            </a>
+          <% else %>
+
+          <!-- ログインユーザーが、エキスパートではなく、ユーザーとしてセッションを組んだ場合。 -->   
+            <a href="/messages/<%= message.session.expert_id %>/feed">
+              <% if message.writer_id == @current_user.id %>
+                自分からエキスパート(<%= User.find(message.session.expert_id).name %>)さんへ。
+              <% else %> 
+                エキスパート(<%= User.find(message.session.expert_id).name %>)さんから。
+              <% end %>
+                メッセージ: <%= message.content %> 
+            </a>
+          
+          <% end %>        
+        
         </li>      
       <% end %>
     </ol>
