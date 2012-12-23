@@ -16,9 +16,18 @@ SampleOfMessage::Application.routes.draw do
   #sessionsコントローラーのリソース。ここに、messageリソースをネストする。
   resources :sessions,only: [:new,:create] do
 
+    #追加リソース
+    member do
+      post "pass"
+
+    end
+
+
+
     #messagesをネストさせる。
     resources :messages,only: [:index,:create]
 
+  
 
   end
 

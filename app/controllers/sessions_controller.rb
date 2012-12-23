@@ -73,9 +73,25 @@ class SessionsController < ApplicationController
   end
 
 
+  def pass 
 
+    
+
+
+
+
+
+
+  end
 
   
+
+
+
+
+
+
+
 
 
 

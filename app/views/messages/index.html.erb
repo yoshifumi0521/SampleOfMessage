@@ -71,6 +71,10 @@
 
 <div data-role="footer" data-position="fixed" data-theme="b">
 
+  <!-- パスボタンをつける。 -->  
+  <p><%= link_to "パス",pass_session_path(@session.id),:method => "post"  %> </p>
+
+  <!-- 送信フォームをつくる。 -->
   <%= form_for @post,:url => {:action => 'create'} do |form| %> 
 
     <%= form.hidden_field :session_id %> 
