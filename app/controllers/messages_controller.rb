@@ -36,11 +36,19 @@ class MessagesController < ApplicationController
     @content = params[:message][:content]
     #contentの中身がからだったら、もどる。
     return redirect_to request.env["HTTP_REFERER"] if @content == ""
-  
+
     @post = Message.new
     @post.attributes = params[:message]
 
     if @post.save
+      
+      #5メッセージを超えたらする処理。
+      @session = @post.session
+      if @session.messages.size == 5
+        @session.status = 1
+        @session.save
+      end
+
       #message/indexに戻る。
       redirect_to request.env["HTTP_REFERER"]
       return 

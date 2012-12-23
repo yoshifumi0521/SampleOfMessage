@@ -71,19 +71,35 @@
 
 <div data-role="footer" data-position="fixed" data-theme="b">
 
-  <!-- パスボタンをつける。 -->  
-  <p><%= link_to "パス",pass_session_path(@session.id),:method => "post"  %> </p>
-
-  <!-- 送信フォームをつくる。 -->
-  <%= form_for @post,:url => {:action => 'create'} do |form| %> 
-
-    <%= form.hidden_field :session_id %> 
-    <%= form.hidden_field :post_id %> 
-    <%= form.text_field :content %>
+  <!-- チャット中のみ表示　-->
+  <% if @status == 0 || @status == 1 %> 
     
-    <%= form.submit "送信" %> 
-  <% end %>
+    <!-- パスボタンをつける。 -->
+    <% if @status == 0 %>   
+      <p><%= link_to "パス",pass_session_path(@session.id),:method => "post"  %> </p>
+    <% elsif @status == 1 %>
+      <p><%= link_to "エンド",end_session_path(@session.id),:method => "post"  %></p>
+    <% end %>
+
+
+    <!-- 送信フォームをつくる。 -->
+    <%= form_for @post,:url => {:action => 'create'} do |form| %> 
+
+      <%= form.hidden_field :session_id %> 
+      <%= form.hidden_field :post_id %> 
+      <%= form.text_field :content %>
+    
+      <%= form.submit "送信" %> 
+    <% end %>
   
+  <% elsif @status == 2 || @status == 3 %>
+
+  
+
+
+  <% end %>
+
+
 </div>
 
 

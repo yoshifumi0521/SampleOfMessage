@@ -19,7 +19,7 @@ SampleOfMessage::Application.routes.draw do
     #追加リソース
     member do
       post "pass"
-
+      post "end"
     end
 
 

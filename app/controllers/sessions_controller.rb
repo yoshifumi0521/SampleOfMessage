@@ -72,7 +72,7 @@ class SessionsController < ApplicationController
 
   end
 
-  #パスボタンをつける。
+  #パスボタンを押してからのアクション
   def pass 
  
     @session_id = params[:id]
@@ -96,9 +96,34 @@ class SessionsController < ApplicationController
     end
     
 
-
   end
 
+
+  #エンドボタンを押してからのアクション
+  def end
+
+    @session_id = params[:id]
+    
+    #セッションの情報を取り出す。
+    @session = Session.find_by_id(@session_id)
+    return raise ActiveRecord::RecordNotFound unless @session
+
+    #ステータスを2にする。
+    @session.status = 3
+    
+    #保存する。
+    if @session.save
+      #リダイレクトする。
+      return redirect_to request.env["HTTP_REFERER"]
+      return
+    else
+      #エラー処理。
+      raise
+      return
+    end
+
+
+  end
   
 
 
