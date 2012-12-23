@@ -126,7 +126,33 @@ class SessionsController < ApplicationController
 
   end
   
+ 
+  #ユーザーがセッションに入るためのアクション。新しいセッションをつくるかを判定する。
+  def divide
 
+    #エキスパートのidをいれる。
+    @expert_id = params[:q]
+
+    #一番新しいセッションを取り出す。
+    @last_session = Session.where(:user_id => @current_user.id,:expert_id => @expert_id).last
+
+    #@last_sessionがない場合や、@last_sessionがパスや、終了の場合にする処理。
+    if !@last_session || @last_session.status == 2 || @last_session.status == 3
+      
+      redirect_to :controllers => "sessions",:action => "new",:q => @expert_id 
+      return 
+    
+    elsif @last_session.status == 0 || @last_session.status == 1
+      
+      redirect_to session_messages_path(@last_session.id) 
+      return
+
+    end
+
+
+
+
+  end
 
 
 

@@ -21,6 +21,10 @@ SampleOfMessage::Application.routes.draw do
       post "pass"
       post "end"
     end
+    
+    collection do
+      get "divide"
+    end
 
     #messagesをネストさせる。
     resources :messages,only: [:index,:create]
