@@ -11,9 +11,19 @@
 
 
 <div data-role="content">
+ 
   <h1>expert(<%= @expert.name %>)さん</h1>
 
-  <p><a href="#">セッションスタート</a></p>
+  <p><%= link_to "セッションスタート",:controller => "sessions",:action => "new",:q => @expert.id %></p>
+
+
+
+
+
+
+
+
+
 
 </div>
 

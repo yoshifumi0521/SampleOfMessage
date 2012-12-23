@@ -1,2 +1,49 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+
+<div data-role="header" data-position="fixed" data-theme="b">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "エキスパート一覧",:root %></li>
+      <li><%= link_to "メッセージ" %></li>
+      <li><%= link_to "プロフィール" %></li>
+    </ul>
+  </div>
+
+  <p>expert(<%= @expert.name %>)さんとのセッション</p>
+
+</div>
+
+<div data-role="content">
+
+  <p>セッションをスタートできます。</p>
+
+
+
+
+
+
+
+</div>
+
+
+
+<div data-role="footer" data-position="fixed" data-theme="b">
+
+  <%= form_for @session do |form| %> 
+
+    <%= form.hidden_field :user_id %> 
+    <%= form.hidden_field :expert_id %> 
+    <%= form.hidden_field :thread_id %> 
+
+    <input type="text" name="content">
+
+    <%= form.submit "送信" %> 
+  <% end %>
+  
+</div>
+
+
+
+
+
+
+

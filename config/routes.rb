@@ -7,10 +7,10 @@ SampleOfMessage::Application.routes.draw do
   get "logins/destroy"
 
   #expertsコントローラーのリソース
-  resources :experts
+  resources :experts,only: [:index,:show]
 
   #sessionsコントローラーのリソース
-  resources :sessions
+  resources :sessions,only: [:new,:create]
 
 
 

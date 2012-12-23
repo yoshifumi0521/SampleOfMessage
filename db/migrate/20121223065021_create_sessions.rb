@@ -4,7 +4,7 @@ class CreateSessions < ActiveRecord::Migration
       t.integer :user_id,null: false
       t.integer :expert_id,null: false
       t.integer :thread_id,null: false
-      t.integer :status,null: false,defaut: 0
+      t.integer :status,null: false,:default => 0
 
       t.timestamps
     end

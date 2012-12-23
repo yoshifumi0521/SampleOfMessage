@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(:version => 20121223065354) do
   add_index "messages", ["session_id"], :name => "index_messages_on_session_id"
 
   create_table "sessions", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "expert_id",  :null => false
-    t.integer  "thread_id",  :null => false
-    t.integer  "status",     :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",                   :null => false
+    t.integer  "expert_id",                 :null => false
+    t.integer  "thread_id",                 :null => false
+    t.integer  "status",     :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
