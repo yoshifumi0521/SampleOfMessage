@@ -1,0 +1,101 @@
+
+<div data-role="header" data-position="fixed" data-theme="b">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "エキスパート一覧",:root %></li>
+      <li><%= link_to "メッセージ",box_messages_path %></li>
+      <li><%= link_to "プロフィール" %></li>
+    </ul>
+  </div>
+</div>
+
+
+<div data-role="content">
+  
+  <p>メッセージボックス</p>
+
+  <% if @messages %>
+    
+    <!--　メッセージ簡易表示する。 -->
+    <ul data-role="listview" data-theme="c">
+
+      <% @messages.each do |message| %>
+        <li>
+       
+          <!-- ログインユーザーが、ユーザーとしてセッションを組んだ場合。 --> 
+          <% if @current_user.id == message.session.user_id %>
+            
+            <a href="/sessions/<%= message.session.id %>/messages">
+
+              <% if message.post_id == @current_user.id %>
+                自分からエキスパート(<%= User.find(message.session.expert_id).name %>)さんへ質問。
+              <% else %>
+                エキスパート(<%= User.find(message.session.expert_id).name %>)さんから回答。
+              <% end %>
+            
+              <!--　チャット中、終了、パスかどうかを表示する。-->
+              <% if message.session.status == 0 || message.session.status == 1 %>
+                (チャット中)
+              <% elsif message.session.status == 2 %>
+                (パス)
+              <% elsif message.session.status == 3 %>
+                (終了)
+              <% end %> 
+            
+              <br />
+               メッセージ: <%= message.content %> 
+       
+            </a>
+
+          <% else %>
+          <!-- ログインユーザーがエキスパートとして、セッションを組んだ場合。 -->
+            
+            <a href="/sessions/<%= message.session.id %>/messages">
+
+
+              <% if message.post_id == @current_user.id %>
+                自分から質問者(<%= User.find(message.session.user_id).name %>)さんへ回答。
+              <% else %>
+                質問者(<%= User.find(message.session.user_id).name %>)
+              <% end %>
+
+              <!--　チャット中、終了、パスかどうかを表示する。--> 
+              <% if message.session.status == 0 || message.session.status == 1 %>
+                (チャット中) 
+              <% elsif message.session.status == 2 %> 
+                (パス)
+              <% elsif message.session.status == 3 %> 
+                (終了)
+              <% end %> 
+
+              <br />
+              メッセージ: <%= message.content %> 
+            </a>
+          <% end %>
+
+        </li>
+      <% end %>
+
+    </ul>
+
+  <% else %>
+    
+    <p>一度もセッションを組んでいません</p>
+
+  <% end %>
+
+
+
+<div>
+
+
+
+
+
+
+
+
+
+
+
+

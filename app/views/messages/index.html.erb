@@ -3,7 +3,7 @@
   <div data-role="navbar">
     <ul>
       <li><%= link_to "エキスパート一覧",:root %></li>
-      <li><%= link_to "メッセージ" %></li>
+      <li><%= link_to "メッセージ",box_messages_path %></li>
       <li><%= link_to "プロフィール" %></li>
     </ul>
   </div>
@@ -92,7 +92,7 @@
       <%= form.submit "送信" %> 
     <% end %>
   
-  <% elsif @status == 2 || @status == 3 %>
+  <% elsif @flag == false  %>
 
     <p>新しいセッションをスタート</p>
   
@@ -102,24 +102,6 @@
 
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

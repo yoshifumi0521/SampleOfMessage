@@ -27,6 +27,15 @@ class MessagesController < ApplicationController
     @post.post_id = @current_user.id
     @post.session_id = @session.id 
 
+    #パスと終了のとき。最新のSessionを取り出す。
+    if @status == 2 || @status == 3
+      @last_session = Session.where(:user_id => @current_user.id,:expert_id => @partner.id).last if @role == "user"
+      @last_session = Session.where(:user_id => @partner.id,:expert_id => @current_user.id).last if @role == "expert"
+      
+      #最新のSessionがチャット中ならば、flagをtrueにする。
+      @flag = true if @last_session.status == 0 || @last_session.status == 1
+    end
+
   end
 
   #メッセージが投稿されたらする処理。   
@@ -61,7 +70,29 @@ class MessagesController < ApplicationController
   end
 
 
+  #メッセージボックスを表示させるためのアクション
+  def box
+    
+    #ユーザーとエキスパートどっちのメッセージのSessionモデルを取り出す。
+    @current_user_id = @current_user.id 
+    @sessions = Session.where("user_id = ? or expert_id = ?",@current_user_id,@current_user_id)
 
+    #メッセージを仮にいれる配列変数 
+    @arrMes = []
+    #メッセージの配列の最後のオブジェクトを取り出す。
+    @sessions.each do |session|
+      #空の場合は取り除く。
+      @arrMes <<  session.messages.last  
+    end
+
+    #@arrMesをソートする。idの古い順でソート。
+    @messages = @arrMes.sort{|a,b|
+      b.id <=> a.id
+    }
+
+
+
+  end
 
 
 
