@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
     #Sessionオブジェクトをとりだす。
     @session = Session.find_by_id(params[:session_id]) 
     return raise ActiveRecord::RecordNotFound unless @session
+    @status = @session.status
 
     #sessionモデルの中にログインユーザーがはいってなかったら、エラー
     return raise unless @session.user_id == @current_user.id || @session.expert_id == @current_user.id 
@@ -22,15 +23,16 @@ class MessagesController < ApplicationController
     @messages = @session.messages
 
     #空のメッセージのオブジェクトをつくる。
-    @post = @session.messages.new
+    @post = Message.new
     @post.post_id = @current_user.id
+    @post.session_id = @session.id 
 
-  
   end
 
-   
-  def show
-  
+  #メッセージが投稿されたらする処理。   
+  def create
+    
+    logger.debug("aaaaaa")
 
 
 
@@ -38,8 +40,23 @@ class MessagesController < ApplicationController
 
 
 
-  
+
+
+
+
   end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,102 @@
 
+<div data-role="header" data-position="fixed" data-theme="b">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "エキスパート一覧",:root %></li>
+      <li><%= link_to "メッセージ" %></li>
+      <li><%= link_to "プロフィール" %></li>
+    </ul>
+  </div>
+
+  <p>
+    <% if @role == "user" %>
+      エキスパート(<%= @partner.name %>)さんとのセッション
+    <% elsif @role == "expert" %>
+      質問者(<%= @partner.name %>)さんとのセッション
+    <% end %>
+    
+    <% if @status == 0 || @status == 1 %>
+      (チャット中)
+    <% elsif @status == 2 %>
+      (パス中)
+    <% elsif @status == 3 %>
+      (終了)
+    <% end %>
+  </p>
+
+
+</div>
+
+
+
+
+<div data-role="content">
+
+  <% if @messages %>
+    <ol>
+      <% @messages.each do |message| %>
+ 
+
+        <li>
+          <% if @role == "user" %>
+            <% if message.post_id == @current_user.id %>
+              自分からエキスパート(<%= @partner.name %>)さんへ  
+            <% else %>
+              エキスパート(<%= @partner.name %>)さんから
+            <% end %>
+          <% elsif @role == "expert" %>
+            <% if message.post_id == @current_user.id %>
+              自分から質問者(<%= @partner.name %>)さんへ  
+            <% else %>
+              質問者(<%= @partner.name %>)さんから
+            <% end %>
+          <% end %>
+          
+          <br />
+          <%= message.content %>
+
+        </li>
+
+
+      <% end %>
+    </ol>
+  <% else %>
+
+    <p>セッションはスタートしていません。</p>
+  
+  <% end %>
+
+</div>
+
+
+<div data-role="footer" data-position="fixed" data-theme="b">
+
+  <%= form_for @post,:url => {:action => 'create'} do |form| %> 
+
+    <%= form.hidden_field :session_id %> 
+    <%= form.hidden_field :post_id %> 
+    <%= form.text_field :content %>
+    
+    <%= form.submit "送信" %> 
+  <% end %>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

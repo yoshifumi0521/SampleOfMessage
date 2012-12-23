@@ -17,7 +17,7 @@ SampleOfMessage::Application.routes.draw do
   resources :sessions,only: [:new,:create] do
 
     #messagesをネストさせる。
-    resources :messages,only: [:index]
+    resources :messages,only: [:index,:create,:update]
 
 
   end
