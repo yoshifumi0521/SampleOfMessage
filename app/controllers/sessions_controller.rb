@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     #メッセージ内容をとりだす。
     @content = params[:content]
     #contentの中身がからだったら、もどる。
-    return redirect_to request.env["HTTP_REFERER"] if @content = ""
+    return redirect_to request.env["HTTP_REFERER"] if @content == ""
 
     #セッションの情報を取得する。
     @session = Session.new
@@ -57,10 +57,10 @@ class SessionsController < ApplicationController
     #保存する。されなかったら、エラーを起こす。
     return raise unless @session.save
 
-    @message = @session.message.new(:post_id => @current_user.id,:content => @content)
+    @message = @session.messages.new(:post_id => @current_user.id,:content => @content)
     if @message.save
       #保存されたらする処理。Messageリソースにとぶ。
-       
+      redirect_to session_messages_path(@session.id)       
       return
     else
       #エラー処理を起こす。

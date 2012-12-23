@@ -1,5 +1,9 @@
 SampleOfMessage::Application.routes.draw do
 
+  get "messages/index"
+
+  get "messages/show"
+
   root :to => "experts#index" 
 
   get "login" => "logins#login"
@@ -9,8 +13,14 @@ SampleOfMessage::Application.routes.draw do
   #expertsコントローラーのリソース
   resources :experts,only: [:index,:show]
 
-  #sessionsコントローラーのリソース
-  resources :sessions,only: [:new,:create]
+  #sessionsコントローラーのリソース。ここに、messageリソースをネストする。
+  resources :sessions,only: [:new,:create] do
+
+    #messagesをネストさせる。
+    resources :messages,only: [:index]
+
+
+  end
 
 
 
