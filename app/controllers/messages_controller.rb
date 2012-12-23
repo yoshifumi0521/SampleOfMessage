@@ -32,18 +32,24 @@ class MessagesController < ApplicationController
   #メッセージが投稿されたらする処理。   
   def create
     
-    logger.debug("aaaaaa")
+    #メッセージ内容をとりだす。
+    @content = params[:message][:content]
+    #contentの中身がからだったら、もどる。
+    return redirect_to request.env["HTTP_REFERER"] if @content == ""
+  
+    @post = Message.new
+    @post.attributes = params[:message]
 
-
-
-
-
-
-
-
-
-
-
+    if @post.save
+      #message/indexに戻る。
+      redirect_to request.env["HTTP_REFERER"]
+      return 
+    else 
+      #エラー処理をする。
+      raise
+      return
+    end
+  
   end
 
 
