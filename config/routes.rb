@@ -1,12 +1,18 @@
 SampleOfMessage::Application.routes.draw do
 
   root :to => "experts#index" 
-  resources :experts
 
-  
   get "login" => "logins#login"
   post "logins/create"
   get "logins/destroy"
+
+  #expertsコントローラーのリソース
+  resources :experts
+
+  #sessionsコントローラーのリソース
+  resources :sessions
+
+
 
 
   # The priority is based upon order of creation:

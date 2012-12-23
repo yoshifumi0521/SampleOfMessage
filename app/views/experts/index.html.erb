@@ -1,13 +1,28 @@
-<h1>Experts一覧</h1>
 
-<ol>
-  <% @experts.each do |expert| %>
-    <li>
-      <%= link_to expert.name,expert_path(expert.id) %>
-    </li>
-  <% end %>
-</ol>
+<div data-role="header" data-position="fixed" data-theme="b">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "エキスパート一覧",:root %></li>
+      <li><%= link_to "メッセージ" %></li>
+      <li><%= link_to "プロフィール" %></li>
+    </ul>
+  </div>
+</div>
 
+
+<div data-role="content">
+
+  <h1>Experts一覧</h1>
+
+  <ol>
+    <% @experts.each do |expert| %>
+      <li>
+        <%= link_to expert.name,expert_path(expert.id) %>
+      </li>
+    <% end %>
+  </ol>
+
+<div>
 
 
 

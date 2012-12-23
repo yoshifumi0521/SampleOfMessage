@@ -1,8 +1,21 @@
-<h1>expert(<%= @expert.name %>)さん</h1>
 
-<p><a href="#">セッションスタート</a></p>
+<div data-role="header" data-position="fixed" data-theme="b">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "エキスパート一覧",:root %></li>
+      <li><%= link_to "メッセージ" %></li>
+      <li><%= link_to "プロフィール" %></li>
+    </ul>
+  </div>
+</div>
 
 
+<div data-role="content">
+  <h1>expert(<%= @expert.name %>)さん</h1>
+
+  <p><a href="#">セッションスタート</a></p>
+
+</div>
 
 
 
