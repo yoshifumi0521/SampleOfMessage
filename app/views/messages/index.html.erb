@@ -92,7 +92,7 @@
       <%= form.submit "送信" %> 
     <% end %>
   
-  <% elsif @flag == true && (@status == 2 || @status == 3 )  %>
+  <% elsif @role == "user" && @flag == true && (@status == 2 || @status == 3 )  %>
 
     <p>新しいセッションをスタート</p>
   

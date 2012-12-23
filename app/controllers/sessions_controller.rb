@@ -40,7 +40,8 @@ class SessionsController < ApplicationController
     #新しいセッションをつくる。
     @session = Session.new(:user_id => @current_user.id,:expert_id => @expert_id,:thread_id => @last_session.thread_id + 1 ) if @last_session
 
-     
+    
+
   end
 
   #新しいセッションでメッセージをやりとりしたときのアクション
