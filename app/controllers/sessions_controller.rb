@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   
   end
 
+
   #新しいセッションをつくるときのアクション 
   def new
     
@@ -125,7 +126,6 @@ class SessionsController < ApplicationController
 
   end
   
-
 
 
 

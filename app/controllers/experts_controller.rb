@@ -15,7 +15,7 @@ class ExpertsController < ApplicationController
   end
 
 
-
+  #エキスパートの詳細を表示する。
   def show
 
     @expert = User.find_by_id(params[:id])

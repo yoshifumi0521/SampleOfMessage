@@ -31,10 +31,12 @@ class MessagesController < ApplicationController
     if @status == 2 || @status == 3
       @last_session = Session.where(:user_id => @current_user.id,:expert_id => @partner.id).last if @role == "user"
       @last_session = Session.where(:user_id => @partner.id,:expert_id => @current_user.id).last if @role == "expert"
-      
-      #最新のSessionがチャット中ならば、flagをtrueにする。
-      @flag = true if @last_session.status == 0 || @last_session.status == 1
+     
+      #最新のSessionがパスや終了中ならば、flagをtrueにする。
+      @flag = true if @last_session.status == 2 || @last_session.status == 3
+    
     end
+    
 
   end
 
