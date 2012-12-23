@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-
+    
+    #ログインしてなかったら、リダイレクトする。
     return redirect_to :login unless @current_user
 
   end

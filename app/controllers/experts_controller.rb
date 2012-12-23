@@ -9,8 +9,19 @@ class ExpertsController < ApplicationController
     #エキスパートのみ取り出す。ログインユーザーの排除
     @experts = User.where(["advice = ? and id != ?", true, @current_user.id])
 
+
+
   
-  
+  end
+
+
+
+  def show
+
+    @expert = User.find_by_id(params[:id])
+
+
+
   end
 
 

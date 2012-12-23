@@ -3,9 +3,7 @@
 <ol>
   <% @experts.each do |expert| %>
     <li>
-      <a href="#">
-        <%= expert.name %>
-      </a>
+      <%= link_to expert.name,expert_path(expert.id) %>
     </li>
   <% end %>
 </ol>

@@ -1,8 +1,9 @@
 SampleOfMessage::Application.routes.draw do
 
-  get "experts/index"
   root :to => "experts#index" 
- 
+  resources :experts
+
+  
   get "login" => "logins#login"
   post "logins/create"
   get "logins/destroy"
