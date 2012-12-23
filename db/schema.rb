@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211064958) do
+ActiveRecord::Schema.define(:version => 20121223065354) do
 
   create_table "messages", :force => true do |t|
-    t.integer  "writer_id"
-    t.text     "content"
     t.integer  "session_id"
+    t.integer  "post_id"
+    t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(:version => 20121211064958) do
   add_index "messages", ["session_id"], :name => "index_messages_on_session_id"
 
   create_table "sessions", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "expert_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "expert_id",  :null => false
+    t.integer  "thread_id",  :null => false
+    t.integer  "status",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
