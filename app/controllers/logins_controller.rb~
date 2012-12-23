@@ -1,6 +1,6 @@
 #coding: utf-8
 #ログインするときのコントローラー
-class SessionsController < ApplicationController
+class LoginsController < ApplicationController
 
   #applicationコントローラーのauthorizeメソッドは実行しないようにする。
   skip_before_filter :authorize

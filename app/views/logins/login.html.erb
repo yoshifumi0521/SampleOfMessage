@@ -1,0 +1,11 @@
+
+<h1>ログイン画面</h1>
+
+<%= form_tag("logins/create") do %>
+  <p>名前:<%= text_field_tag "name" %></p>
+  <p>パスワード:<%= text_field_tag "password" %></p>
+  <p><%= submit_tag "ログイン" %></p>
+<% end %>
+
+
+

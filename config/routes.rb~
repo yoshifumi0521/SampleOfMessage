@@ -3,8 +3,6 @@ SampleOfMessage::Application.routes.draw do
   #root :to => "messages#index" 
  
   get "login" => "logins#login"
-  post "logins/create"
-  get "logins/destroy"
 
 
   # The priority is based upon order of creation:
