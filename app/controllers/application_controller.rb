@@ -14,8 +14,13 @@ class ApplicationController < ActionController::Base
       #クッキー情報があったとしても、ユーザー情報がなくてnilだったら、クッキーを削除する。 
       cookies.delete :user_id unless @current_user
     end
- end
+  end
 
+  def login_required
+
+    return redirect_to :login unless @current_user
+
+  end
 
 
 

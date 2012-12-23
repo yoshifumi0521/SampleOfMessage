@@ -9,17 +9,13 @@ class LoginsController < ApplicationController
     
     @user = User.find_by_name_and_password(params[:name],params[:password])
     
-    if !@user
-      redirect_to :login
-      return
-    else
-      #ここでクッキーをいれる。
-      cookies.signed[:user_id] ={ value: @user.id ,expires: 30.days.from_now } 
-      redirect_to :root
-      return
-    end
-
-
+    return redirect_to :login unless @user
+      
+    #ここでクッキーをいれる。
+    cookies.signed[:user_id] ={ value: @user.id ,expires: 30.days.from_now } 
+    
+    return redirect_to :root
+  
   end
 
   #クッキーを削除する。  

@@ -1,6 +1,7 @@
 SampleOfMessage::Application.routes.draw do
 
-  #root :to => "messages#index" 
+  get "experts/index"
+  root :to => "experts#index" 
  
   get "login" => "logins#login"
   post "logins/create"
