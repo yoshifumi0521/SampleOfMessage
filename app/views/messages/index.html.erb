@@ -94,8 +94,9 @@
   
   <% elsif @status == 2 || @status == 3 %>
 
+    <p>新しいセッションをスタート</p>
   
-
+    <p><%= link_to "スタート",:controller => "sessions",:action => "new",:q => @partner.id %></p>
 
   <% end %>
 
