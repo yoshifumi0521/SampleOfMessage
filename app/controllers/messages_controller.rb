@@ -61,8 +61,11 @@ class MessagesController < ApplicationController
       end
 
       #message/indexに戻る。
-      redirect_to request.env["HTTP_REFERER"]
-      return 
+      #redirect_to request.env["HTTP_REFERER"]
+      #return 
+    
+      render :json => {:content => @content }
+
     else 
       #エラー処理をする。
       raise

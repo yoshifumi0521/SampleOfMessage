@@ -33,7 +33,7 @@
 <div data-role="content">
 
   <% if @messages %>
-    <ol>
+    <ol id="contentlist">
       <% @messages.each do |message| %>
  
 
@@ -83,13 +83,13 @@
 
 
     <!-- 送信フォームをつくる。 -->
-    <%= form_for @post,:url => {:action => 'create'} do |form| %> 
+    <%= form_for @post,:url => {:action => 'create'},:remote => true ,:html => {:id => 'form'} do |form| %> 
 
       <%= form.hidden_field :session_id %> 
       <%= form.hidden_field :post_id %> 
       <%= form.text_field :content %>
     
-      <%= form.submit "送信" %> 
+      <%= form.submit "送信",:id => "submit" %> 
     <% end %>
   
   <% elsif @role == "user" && @flag == true && (@status == 2 || @status == 3 )  %>
@@ -102,6 +102,61 @@
 
 
 </div>
+
+
+<script>
+
+
+  $(function(){
+ 
+    var contentlist = $("#contentlist");
+    var text_area = $("#message_content")[0];
+
+    //Ajax処理    
+    $("#form")
+      .live("ajax:success", function(e,data){   
+        //成功
+        console.log("成功！！");
+
+        var content = "<li>" + data["content"] + "</li>";
+        //コメントを追加する。
+        contentlist.append(content);
+        
+        //テキストエリアを空にする。
+        text_area.value = ""
+
+
+
+    })
+  
+  
+  
+  
+  
+  
+  
+  })
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
