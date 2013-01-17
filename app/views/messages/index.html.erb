@@ -111,6 +111,30 @@
  
     var contentlist = $("#contentlist");
     var text_area = $("#message_content")[0];
+    //セッションのidをいれる。
+    var session_id = $("#message_session_id")[0].value; 
+
+    //ここにsocket.ioを使って、ソケット通信をする。
+    var socket = io.connect("http://localhost:2000/");
+    socket.on('connect', function(){
+    
+      //socket通信を成功
+      console.log("ソケット通信に成功");
+     
+      //自分がログインしたことをつたえる処理。セッションidをサーバーにおくる。
+      socket.emit('login',{text:"ユーザーがloginしました"});
+      
+      //相手がメッセージを送ったらうけとるイベントを設置
+      socket.on("session_"+ session_id ,function(data){
+     
+        console.log("相手からメッセージが届いた");
+      
+      });
+
+    
+    });
+    
+    
 
     //Ajax処理    
     $("#form")
@@ -125,10 +149,18 @@
         //テキストエリアを空にする。
         text_area.value = ""
 
+        socket.emit("message",{text: "メッセージの送信",session_id: session_id });
+
+      });
+
+    
 
 
-    })
-  
+
+
+
+
+
   
   
   

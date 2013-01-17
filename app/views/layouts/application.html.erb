@@ -4,6 +4,8 @@
   <title>SampleOfMessage</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+  <!-- socket.ioライブラリのCDNをここに埋め込む -->
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js"></script>
   <%= javascript_include_tag "application" %>
     <script>
       $(document).bind('mobileinit', function(){
